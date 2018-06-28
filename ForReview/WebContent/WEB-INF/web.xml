@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- web-appは手で書くと間違いのもとになるので、
+	可能であればTomCatのものをそのままパクるべき
+	※　大文字・小文字は区別されるので要注意-->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+
+ <!-- 自由な名前を -->
+  <display-name>ecsite</display-name>
+
+ <!-- WelcomeFileはプロジェクトを実行した際に
+ 	　最初に表示されるJSPファイルを指定する -->
+  <welcome-file-list>
+    <welcome-file>home.jsp</welcome-file>
+  </welcome-file-list>
+
+<security-role>
+  	<role-name>manager</role-name>
+</security-role>
+
+<!-- ErrorPageは特定のエラーコード(404等)が出たときに
+	任意のJSPファイルに飛ばす設定を出きる
+<error-page>
+	<error-code>404</error-code>
+	<location>/ERROR/errors/error404</location>
+</error-page> -->
+
+<!-- filterは以下の2つの要素から構成され、指定したものをプロジェクトに通す役割を持つ。
+	 <filter>のnameとclassで今後使用したいものとそれ実装したクラスを指定し、
+	 <mapping>のnameとpatternで、すべてのURLに対しsrutsを実行する処理を行う-->
+<filter>
+	<filter-name>struts2</filter-name>
+	<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+</filter>
+
+<filter-mapping>
+	<filter-name>struts2</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+</web-app>
